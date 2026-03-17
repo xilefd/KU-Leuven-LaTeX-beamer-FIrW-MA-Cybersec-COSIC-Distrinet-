@@ -1,4 +1,4 @@
-# KU Leuven LaTeX beamer template
+# KU Leuven LaTeX beamer template for Advanced Master in Cyber Security
 
 This is a template to create a KU Leuven presentation with LaTeX.
 
@@ -12,10 +12,10 @@ This is a template to create a KU Leuven presentation with LaTeX.
 ## Examples
 
 **Title page**
-![Title page example](res/example1.png "Title page")
+![Title page example](res/example1.jpg "Title page")
 <br><br>
 **Standard page with an image**
-![Standard page with an image](res/example2.png "Standard page")
+![Standard page with an image](res/example2.jpg "Standard page")
 
 ## License
 
