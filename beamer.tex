@@ -1,0 +1,303 @@
+% 4:3 (default) aspect ratio
+%\documentclass[t, xcolor=table]{beamer}
+% 16:9 aspect ratio
+\documentclass[t, xcolor=table, aspectratio=169]{beamer}
+
+% Basic packages which are recommended for the KUL beamer theme
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[UKenglish]{datetime}
+\usepackage{minted}
+
+%-------------------------%
+% Add extra packages here %
+%-------------------------%
+
+% Apply the KUL beamer theme
+\usetheme{KUL}
+
+% Optional change of minted highlight style
+% \usemintedstyle{friendly}
+
+% Set date and time format
+\newdateformat{SetNewDate}{%
+    \twodigit{\THEDAY}/\twodigit{\THEMONTH}/\THEYEAR
+}
+\SetNewDate
+
+% Setup the title page
+\title{KU Leuven\\\indent\LaTeX{} beamer template}
+\subtitle{Version \KULversion}
+\institute{KU Leuven,Faculty of Engineering Science}
+\author{John Doe}
+\date{\today}
+
+%---------------%
+% Main document %
+%---------------%
+\begin{document}
+    % Title page
+    % ----------
+    \begin{frame}[KUL-title]
+        \titlepage
+    \end{frame}
+
+    % Outline
+    % -------
+    \begin{frame}[KUL-standard-notoc]
+        \frametitle{Outline}
+        \tableofcontentsTOP %aligned at the top of the page
+        %\tableofcontents %aligned at the center of the page
+    \end{frame}
+
+    % Outline with multiple columns
+    \begin{frame}[KUL-standard-notoc]
+        \frametitle{Outline multiple columns}
+        \vspace{1em}
+        \begin{columns}[onlytextwidth,T]
+            \begin{column}{0.5\textwidth}
+                \tableofcontentsTOP[sections={1}]
+            \end{column}
+            \begin{column}{0.5\textwidth}
+                \tableofcontentsTOP[sections={2-3}]
+            \end{column}
+        \end{columns}
+        \vspace{1em}
+        Using the \texttt{column} environment, you can split the ToC over multiple columns.
+    \end{frame}
+
+    % Simple markup
+    % -------------
+    \begin{frame}[KUL-header]
+        \frametitle{Simple markup}
+        \framesubtitle{(using \LaTeX{} obviously)}
+    \end{frame}
+
+    % Unordered lists
+    \begin{frame}[KUL-standard]
+        \frametitle{Unordered list}
+        \begin{itemize}
+            \item First level
+            \begin{itemize}
+                \item Second level
+                \begin{itemize}
+                    \item Third level
+                    \begin{itemize}
+                        \item Fourth level
+                        \begin{itemize}
+                            \item Fifth level
+                        \end{itemize}
+                    \end{itemize}
+                \end{itemize}
+            \end{itemize}
+            \item ...
+        \end{itemize}
+    \end{frame}
+
+    % Ordered lists
+    \begin{frame}[KUL-standard]
+        \frametitle{Ordered list}
+        \begin{enumerate}
+            \item First level
+            \begin{enumerate}
+                \item Second level
+                \begin{enumerate}
+                    \item Third level
+                    \begin{enumerate}
+                        \item Fourth level
+                        \begin{enumerate}
+                            \item Fifth level
+                        \end{enumerate}
+                    \end{enumerate}
+                \end{enumerate}
+            \end{enumerate}
+            \item ...
+        \end{enumerate}
+    \end{frame}
+
+    % Hyperlinks
+    \begin{frame}[KUL-standard]
+        \frametitle{Hyperlinks}
+        \begin{itemize}
+            \item A hyperlink to some interesting page at
+                  \href{https://en.wikipedia.org/wiki/LaTeX}{wikipedia}.
+            \vspace{2em} % 2 lines of spacing
+            \item The same, but with the full URL:
+                  \url{https://en.wikipedia.org/wiki/LaTeX}
+            \vspace{2em} % 2 lines of spacing
+            \item And a special mailto command:
+                  \mailto{john.doe@example.com}
+        \end{itemize}
+    \end{frame}
+
+    % Images
+    \begin{frame}[KUL-standard]
+        \frametitle{Images}
+
+        % c = vertically align center, T = vertically align top,
+        % b = vertically align bottom
+        \begin{columns}[onlytextwidth,c]
+            % First column contains some bullet points
+            \begin{column}{0.5\textwidth}
+                \begin{itemize}
+                    \item Some interesting info about the image...
+                    \vspace{2em}
+                    \item More info about the image...
+                    \vspace{2em}
+                    \item Something seems familiar about the image though...
+                \end{itemize}
+            \end{column}
+            % Second column contains the image
+            \begin{column}{0.5\textwidth}
+                % Note that \textwidth here, is the width of the column, not
+                % of the entire slide (like before with the column)
+                \includegraphics[width=\textwidth]{\KULlogopath}
+            \end{column}
+        \end{columns}
+    \end{frame}
+
+    % Tables
+    % ------
+    \begin{frame}[KUL-header]
+        \frametitle{Tables}
+    \end{frame}
+
+    % Basic tables
+    \begin{frame}[KUL-standard]
+        \frametitle{Basic tables}
+
+        \begin{itemize}
+            \item Using a header row
+        \end{itemize}
+
+        \begin{KULtable}{\textwidth}{|L|C|R|}
+            \hline
+            \KULheadrow{Left aligned, Center aligned, Right aligned}
+            \\ \hline
+            a & b & c
+            \\ \hline
+            d & e & f
+            \\ \hline
+            g & h & i
+            \\ \hline
+        \end{KULtable}
+
+        \begin{itemize}
+            \item Using a header column
+        \end{itemize}
+
+        \begin{KULtable}{\textwidth}{|L|C|C|C|}
+            \hline
+            \KULheadcol{First column} & a & b & c
+            \\ \hline
+            \KULheadcol{Second column} & d & e & f
+            \\ \hline
+            \KULheadcol{Third column} & g & h & i
+        \end{KULtable}
+    \end{frame}
+
+    % Combining columns and rows
+    \begin{frame}[KUL-standard]
+        \frametitle{Combining columns and rows}
+
+        % Note that, since the rows are coloured, a 'multirow' statement needs
+        % to come at the end of a column using a negative amount of rows.
+        \begin{KULtable}{\textwidth}{|L|C|C|}
+            \hline
+            \KULheadrow{Groups, Results A, Results B}
+            \\ \hline
+
+            & 8 & 10
+            \\ \cline{2-3}
+            \multirow{-2}{*}{\cellcolor{KUL-BLUE-TABLE1}Group 1} &
+                \textbf{\color{red}5} & 7
+            \\ \hline
+
+            & 7 & \textbf{\color{red}3}
+            \\ \cline{2-3}
+            \multirow{-2}{*}{\cellcolor{KUL-BLUE-TABLE2}Group 2} &
+                9 & 6
+            \\ \hline
+
+            & \multicolumn{2}{c|}{7} %Note the small letter (i.e. C->c, L->l, ...)
+            \\ \cline{2-3}
+            \multirow{-2}{*}{\cellcolor{KUL-BLUE-TABLE1}Group 3} &
+                \multicolumn{2}{c|}{\textbf{\color{red}2}}
+            \\ \hline
+            & 5 & 6
+            \\ \cline{2-3}
+            \multirow{-2}{*}{\cellcolor{KUL-BLUE-TABLE2}Group 4} &
+                10 & 9
+            \\ \hline
+        \end{KULtable}
+    \end{frame}
+
+    % Vertically aligned tables
+    \begin{frame}[KUL-standard]
+        \frametitle{Vertically aligned tables}
+
+        \begin{KULtable}{\textwidth}
+        {|V{0.3\textwidth}|Z{0.3\textwidth}|W{0.3\textwidth}|}
+            \hline
+            \KULheadrow{Column 1, Column 2, Column 3}
+            \\ \hline
+                This is a long row with left alignment
+                &
+                This is a long row with center alignment
+                &
+                This is a long row with right alignment
+            \\ \hline
+                This uses \texttt{V}
+                &
+                This uses \texttt{Z}
+                &
+                This uses \texttt{W}
+            \\ \hline
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua.
+                &
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua.
+                &
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna aliqua.
+            \\ \hline
+        \end{KULtable}
+    \end{frame}
+
+    % Other fancy stuff
+    % -----------------
+    \begin{frame}[KUL-header]
+        \frametitle{Other fancy stuff}
+    \end{frame}
+
+    % Blocks
+    \begin{frame}[KUL-standard]
+        \frametitle{Blocks}
+        \begin{block}{Block title}
+            This is the format for a standard block
+        \end{block}
+
+        You can also change the width of blocks using the \texttt{varblock} environment.
+        \begin{varblock}[0.5\textwidth]{Variable width block}
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+            incididunt ut labore et dolore magna aliqua.
+        \end{varblock}
+    \end{frame}
+
+    % Code blocks
+    \begin{frame}[KUL-standard,fragile] % fragile is required for minted!!!
+        \frametitle{Code blocks}
+        The \texttt{minted} package is include by default, which allows you to highlight code blocks
+        both inline (\mintinline{latex}{\LaTeX{} math: $a^2 + b^2 = c^2$}) and as a block:
+        \begin{minted}[linenos]{latex}
+\documentclass[12pt, a4paper]{article}
+\begin{document}
+    Hi there!
+\end{document}
+        \end{minted}
+        \vfill
+        \textbf{\color{red}Important}: If you use a \texttt{minted} code block, your slide has to be
+        defined as \texttt{fragile}!
+    \end{frame}
+\end{document}
